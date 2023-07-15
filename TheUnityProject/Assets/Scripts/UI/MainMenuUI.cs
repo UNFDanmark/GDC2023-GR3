@@ -10,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button leaderboardButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button deleteHighscoresButton;
     
     void Start()
     {
@@ -20,18 +21,21 @@ public class MainMenuUI : MonoBehaviour
         
         controlsButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }); 
         
         leaderboardButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(3);
         }); 
         
         quitButton.onClick.AddListener(() =>
         {
             Application.Quit();
         }); 
-        
+        deleteHighscoresButton.onClick.AddListener(() =>
+        {
+            PlayerPrefs.DeleteAll();
+        });
     }
 }

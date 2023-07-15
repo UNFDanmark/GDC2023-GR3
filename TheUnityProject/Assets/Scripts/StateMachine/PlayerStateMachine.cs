@@ -20,6 +20,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public int jumpsSinceGrounded = 0;
     public int groundsTouched = 0;
+    public float forwardVel;
+    public float verticalVel;
     public bool isGrounded = false;
 
     private State currentState;
@@ -62,5 +64,10 @@ public class PlayerStateMachine : MonoBehaviour
         }
         
         isGrounded = groundsTouched > 0;
+    }
+
+    public void AddVerticalVelocity(float newVel)
+    {
+        verticalVel += newVel;
     }
 }

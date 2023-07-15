@@ -19,28 +19,38 @@ public class PlayerDefaultState : State
         
         stateMachine.transform.Rotate(0, turnInput * stateMachine.turnSpeed * Time.deltaTime, 0);
         
-        stateMachine.rb.velocity = (stateMachine.transform.forward * (moveInput * stateMachine.moveSpeed) + Vector3.up * stateMachine.rb.velocity.y);
+        stateMachine.forwardVel = moveInput * stateMachine.moveSpeed;
         
-        if (Input.GetButtonDown("Jump") && stateMachine.isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
-            //Jump from ground
-            
-            stateMachine.rb.velocity = new Vector3(stateMachine.rb.velocity.x, stateMachine.jumpSpeed, stateMachine.rb.velocity.z);
-        }
-        else if (Input.GetButtonDown("Jump") && stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
-        {
-            //Jump in air
-            stateMachine.jumpsSinceGrounded++;
-            
-            stateMachine.rb.velocity = new Vector3(stateMachine.rb.velocity.x, stateMachine.jumpSpeed, stateMachine.rb.velocity.z);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !stateMachine.isGrounded)
-        {
-            stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
-            return;
+            if (stateMachine.isGrounded)
+            {
+                stateMachine.verticalVel = stateMachine.jumpSpeed;
+                
+                stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
+                return;
+            }
+            if (stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
+            {
+                stateMachine.verticalVel = stateMachine.jumpSpeed;
+                stateMachine.jumpsSinceGrounded++;
+                
+                stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
+                return;
+            }
         }
 
-        stateMachine.rb.velocity += Vector3.up * (stateMachine.defaultGravity * Time.deltaTime);
+        if (!stateMachine.isGrounded)
+        {
+            stateMachine.verticalVel += stateMachine.defaultGravity * delta;
+        }
+        else
+        {
+            stateMachine.verticalVel = stateMachine.rb.velocity.y;
+        }
+
+        Vector3 vel = stateMachine.transform.forward * stateMachine.forwardVel + stateMachine.transform.up * stateMachine.verticalVel;
+        stateMachine.rb.velocity = vel;
     }
 
     public override void Exit()
