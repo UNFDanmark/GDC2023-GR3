@@ -26,18 +26,15 @@ public class PlayerDefaultState : State
             if (stateMachine.isGrounded)
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
-                
-                stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
-                return;
             }
-            if (stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
+            else if (stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
                 stateMachine.jumpsSinceGrounded++;
-                
-                stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
-                return;
             }
+            
+            stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
+            return;
         }
 
         if (!stateMachine.isGrounded)

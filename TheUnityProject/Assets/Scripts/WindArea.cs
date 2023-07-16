@@ -10,11 +10,11 @@ public class WindArea : MonoBehaviour
     [SerializeField] private PlayerStateMachine PlayerState;
     private bool Blow;
     
-    private void Update()
+    private void FixedUpdate()
     {
         if (Blow)
         {
-            //PlayerState.AddVerticalVelocity(windForce * Time.deltaTime);
+            PlayerState.AddVerticalVelocity(windForce * Time.deltaTime);
         }
     }
 
