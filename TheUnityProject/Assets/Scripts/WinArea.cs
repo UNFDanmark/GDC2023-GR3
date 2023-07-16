@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class WinArea : MonoBehaviour
 {
-    private const string PLAYERPREFS_HIGHSCORE_KEY = "Highscore";
+    private const string PLAYERPREFS_CURRENTSCORE = "CurrentScore";
     
     [SerializeField] private Timer timer;
 
@@ -21,21 +21,12 @@ public class WinArea : MonoBehaviour
 
         timer.enabled = false;
         float gameTime = timer.GetGameTime();
-        Debug.Log("Win!");
 
-        float highscore = Mathf.Infinity;
-
-        if (PlayerPrefs.HasKey(PLAYERPREFS_HIGHSCORE_KEY))
+        if (hasWon)
         {
-            highscore = PlayerPrefs.GetFloat(PLAYERPREFS_HIGHSCORE_KEY);
+            PlayerPrefs.SetFloat(PLAYERPREFS_CURRENTSCORE, gameTime);
         }
 
-        if (gameTime < highscore)
-        {
-            PlayerPrefs.SetFloat("Highscore", gameTime);
-            PlayerPrefs.Save();
-        }
-
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 }

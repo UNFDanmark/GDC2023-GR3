@@ -14,7 +14,7 @@ public class WindArea : MonoBehaviour
     {
         if (Blow)
         {
-            PlayerState.AddVerticalVelocity(windForce * Time.deltaTime);
+            PlayerState.AddVerticalVelocity(windForce * Time.fixedDeltaTime);
         }
     }
 

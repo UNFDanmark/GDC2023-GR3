@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-
-public class LeaderBoardHighscore : MonoBehaviour
+using TMPro;
+public class LeaderboardLineUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] public TextMeshProUGUI nameText;
+    [SerializeField] public TextMeshProUGUI timeText;
 
     public void SetText(string newName, string newTime)
     {

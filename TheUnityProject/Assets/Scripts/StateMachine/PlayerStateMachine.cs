@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,9 @@ public class PlayerStateMachine : MonoBehaviour
     private void Start()
     {
         currentState = new PlayerDefaultState(this);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     
     private void Update()
@@ -69,5 +73,12 @@ public class PlayerStateMachine : MonoBehaviour
     public void AddVerticalVelocity(float newVel)
     {
         verticalVel += newVel;
+        //Debug.Log(verticalVel);
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

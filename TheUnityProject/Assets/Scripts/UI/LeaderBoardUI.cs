@@ -2,29 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.IO;
 
 public class LeaderBoardUI : MonoBehaviour
 {
-    private const string PLAYERPREFS_HIGHSCORE_KEY = "Highscore";
-    
-    [SerializeField] private LeaderBoardHighscore[] lines;
+    private const string path = "/HIGHSCORES.txt";
+    [SerializeField] private LeaderboardLineUI[] lines;
     
     private void Start()
     {
+        HighscoreEntry[] entries;
+        
+        if (!File.Exists(Application.persistentDataPath + path))
+        {
+            //If no file - create file with empty entries and new player entry
+            
+            entries = HandleMissingFile();
+        }
+        else
+        {
+            //if file - read file
+            
+            StreamReader sr = new StreamReader(Application.persistentDataPath + path);
+            string text = sr.ReadToEnd();
+            sr.Close();
+            
+            HighscoreList highscoreList = JsonUtility.FromJson<HighscoreList>(text);
+            entries = highscoreList.highscores;
+        }
+        
+        UpdateUI(entries);
+    }
+    
+    private HighscoreEntry[] HandleMissingFile()
+    {
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + path);
+
+        HighscoreList highscoreList = new HighscoreList();
+
+        for (int i = 0; i < highscoreList.highscores.Length; i++)
+        {
+            highscoreList.highscores[i] = new HighscoreEntry("Empty", -1f);
+        }
+
+        string json = JsonUtility.ToJson(highscoreList);
+
+        sw.Write(json);
+        sw.Close();
+
+        return highscoreList.highscores;
+    }
+    
+    private void UpdateUI(HighscoreEntry[] entries)
+    {
         for (int i = 0; i < lines.Length; i++)
         {
-            lines[i].gameObject.SetActive(false);
+            HighscoreEntry entry = entries[i];
+
+            string name = entry.name;
+            float time = entry.time;
+
+            string timeString = TimeConverter.TimeFloatToString(time);
+
+            lines[i].timeText.text = timeString;
+            lines[i].nameText.text = name;
         }
-    }
-
-    private string TimeFloatToString(float _seconds)
-    {
-        int minutes = Mathf.FloorToInt(_seconds / 60);
-        int seconds = Mathf.FloorToInt(_seconds - minutes * 60);
-        
-        string minutesText = minutes < 10 ? "0" + minutes.ToString() : minutes.ToString();
-        string secondsText = seconds < 10 ? "0" + seconds.ToString() : seconds.ToString();
-
-        return $"{minutesText}:{secondsText}";
     }
 }
