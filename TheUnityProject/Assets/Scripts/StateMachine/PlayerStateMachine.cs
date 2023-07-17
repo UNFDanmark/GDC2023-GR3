@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerStateMachine : MonoBehaviour
 {
     private const string GROUND_TAG = "Ground";
     
-    public float moveSpeed;
+    public float defaultMoveSpeed;
+    public float defaultAccelerationConstant;
+    public float roundMoveDownSpeedLimit;
     public float turnSpeed;
     public float glidingTurnSpeed;
     public float jumpSpeed;
@@ -25,6 +28,26 @@ public class PlayerStateMachine : MonoBehaviour
     public float verticalVel;
     public bool isGrounded = false;
 
+    public enum DeaccelerationMethod
+    {
+        constant, 
+        LERP,
+    }
+
+    [Header("Gliding to default deacceleration")]
+    public DeaccelerationMethod deaccelerationMethod;
+
+    [Header("Constant")] 
+    public float constantDeaccelerationPerSecond;
+
+    [Header("LERP")] 
+    public float groundedLerpDampeningConstant;
+
+    public float groundedLerpConstantDeaccelerationPerSecond;
+    public float inAirLerpDampeningConstant;
+
+    public float inAirLerpConstantDeaccelerationPerSecond;
+    
     private State currentState;
     
     private void Start()

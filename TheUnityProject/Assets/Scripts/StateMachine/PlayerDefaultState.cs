@@ -18,8 +18,8 @@ public class PlayerDefaultState : State
         float moveInput = Input.GetAxis("Vertical");
         
         stateMachine.transform.Rotate(0, turnInput * stateMachine.turnSpeed * Time.deltaTime, 0);
-        
-        stateMachine.forwardVel = moveInput * stateMachine.moveSpeed;
+
+        HandleForwardMovement(moveInput, delta);
         
         if (Input.GetButtonDown("Jump"))
         {
@@ -51,6 +51,64 @@ public class PlayerDefaultState : State
         stateMachine.rb.velocity = vel;
     }
 
+    private void HandleForwardMovement(float moveInput, float delta)
+    {
+        
+        if (stateMachine.forwardVel <= stateMachine.defaultMoveSpeed)
+        {
+            float newMove = Mathf.Lerp(stateMachine.forwardVel, moveInput * stateMachine.defaultMoveSpeed, delta * stateMachine.defaultAccelerationConstant);
+            
+            stateMachine.forwardVel = newMove;
+        }
+        else
+        {
+            if (stateMachine.deaccelerationMethod == PlayerStateMachine.DeaccelerationMethod.constant)
+            {
+                float desiredForwardVel = stateMachine.forwardVel;
+
+                if (stateMachine.isGrounded)
+                {
+                    desiredForwardVel -= stateMachine.constantDeaccelerationPerSecond * delta * 2;   
+                }
+                else
+                {
+                    desiredForwardVel -= stateMachine.constantDeaccelerationPerSecond * delta;
+                }
+                
+                desiredForwardVel = Mathf.Max(desiredForwardVel, stateMachine.defaultMoveSpeed);
+
+                stateMachine.forwardVel = desiredForwardVel;
+            }
+            else
+            {
+                float desiredForwardVel;
+
+                if (stateMachine.isGrounded)
+                {
+                    desiredForwardVel = Mathf.Lerp(stateMachine.forwardVel, stateMachine.defaultMoveSpeed, delta * stateMachine.groundedLerpDampeningConstant);
+                    desiredForwardVel -= stateMachine.groundedLerpConstantDeaccelerationPerSecond * delta;
+                }
+                else
+                {
+                    desiredForwardVel = Mathf.Lerp(stateMachine.forwardVel, stateMachine.defaultMoveSpeed, delta * stateMachine.inAirLerpDampeningConstant);
+                    desiredForwardVel -= stateMachine.inAirLerpConstantDeaccelerationPerSecond * delta;
+                }
+                
+                desiredForwardVel = Mathf.Max(desiredForwardVel, stateMachine.defaultMoveSpeed);
+                
+                stateMachine.forwardVel = desiredForwardVel;
+            }
+        }
+        
+        //Set forward velocity to 0 if it negligible
+        if (Mathf.Abs(stateMachine.forwardVel) < stateMachine.roundMoveDownSpeedLimit)
+        {
+            stateMachine.forwardVel = 0f;
+        }
+
+        Debug.Log(stateMachine.forwardVel);
+    }
+    
     public override void Exit()
     {
     }

@@ -32,7 +32,7 @@ public class PlayerGlidingState : State
         }
         stateMachine.verticalVel = Mathf.Clamp(stateMachine.verticalVel, stateMachine.minGlidingVerticalVel, Mathf.Infinity);
         
-        stateMachine.forwardVel += stateMachine.forwardVel * stateMachine.glidingAccelerationPerSecond * Time.deltaTime;
+        stateMachine.forwardVel += stateMachine.forwardVel * stateMachine.glidingAccelerationPerSecond * delta;
         stateMachine.forwardVel = Mathf.Clamp(stateMachine.forwardVel, 0f, stateMachine.maxHorizontalSpeed);
 
         Vector3 vel = stateMachine.transform.forward * stateMachine.forwardVel + Vector3.up * stateMachine.verticalVel;
@@ -40,7 +40,5 @@ public class PlayerGlidingState : State
     }
 
     public override void Exit()
-    {
-        
-    }
+    { }
 }

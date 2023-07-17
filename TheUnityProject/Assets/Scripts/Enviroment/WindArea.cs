@@ -11,6 +11,7 @@ public class WindArea : MonoBehaviour
     private bool Blow;
     private bool playerInWind;
     private float timer;
+    [SerializeField] private float startDelayDuration;
     [SerializeField] private float windDurationShort;
     [SerializeField] private float windDurationLong;
     [SerializeField] private ParticleSystem particleSystem;
@@ -46,6 +47,8 @@ public class WindArea : MonoBehaviour
 
     private IEnumerator Run()
     {
+        yield return new WaitForSeconds(startDelayDuration);
+        
         while (true)
         {
             Blow = true;
