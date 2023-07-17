@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -250, y: -70}
+  m_AnchoredPosition: {x: -250, y: 0}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2848646
@@ -1296,6 +1296,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 622710272}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &686290989 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8130231299185427805, guid: e98120d05bce4bd49bfc516f5bc98641,
+    type: 3}
+  m_PrefabInstance: {fileID: 4211406511296356250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &717735005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,17 +1721,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d58143379e798c5418f054f5d68af83b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.7
+      value: -4.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d58143379e798c5418f054f5d68af83b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d58143379e798c5418f054f5d68af83b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7
+      value: 72.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d58143379e798c5418f054f5d68af83b,
         type: 3}
@@ -3170,6 +3176,26 @@ PrefabInstance:
       propertyPath: PlayerState
       value: 
       objectReference: {fileID: 143645965}
+    - target: {fileID: 1962085412801323024, guid: e98120d05bce4bd49bfc516f5bc98641,
+        type: 3}
+      propertyPath: windDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962085412801323024, guid: e98120d05bce4bd49bfc516f5bc98641,
+        type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 686290989}
+    - target: {fileID: 1962085412801323024, guid: e98120d05bce4bd49bfc516f5bc98641,
+        type: 3}
+      propertyPath: windDurationLong
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962085412801323024, guid: e98120d05bce4bd49bfc516f5bc98641,
+        type: 3}
+      propertyPath: windDurationShort
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7208435184568055562, guid: e98120d05bce4bd49bfc516f5bc98641,
         type: 3}
       propertyPath: m_Name
@@ -3179,6 +3205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: TrailModule.lifetime.scalar
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130231299185427805, guid: e98120d05bce4bd49bfc516f5bc98641,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8130231299185427805, guid: e98120d05bce4bd49bfc516f5bc98641,
         type: 3}
