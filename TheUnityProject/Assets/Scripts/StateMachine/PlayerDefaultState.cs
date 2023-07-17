@@ -105,8 +105,6 @@ public class PlayerDefaultState : State
         {
             stateMachine.forwardVel = 0f;
         }
-
-        Debug.Log(stateMachine.forwardVel);
     }
     
     public override void Exit()

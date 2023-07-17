@@ -386,7 +386,6 @@ GameObject:
   - component: {fileID: 143645962}
   - component: {fileID: 143645964}
   - component: {fileID: 143645963}
-  - component: {fileID: 143645961}
   - component: {fileID: 143645965}
   m_Layer: 0
   m_Name: Player
@@ -412,25 +411,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &143645961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143645959}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8333d421b084ca43bebe21de5d8b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  turnSpeed: 65
-  jumpSpeed: 6
-  defaultGravity: -9.82
-  glidingGravity: -2
-  midAirJumps: 1
-  rb: {fileID: 143645963}
 --- !u!65 &143645962
 BoxCollider:
   m_ObjectHideFlags: 0
