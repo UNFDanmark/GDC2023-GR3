@@ -72,8 +72,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void AddVerticalVelocity(float newVel)
     {
-        verticalVel += newVel;
-        //Debug.Log(verticalVel);
+            verticalVel += newVel;
+            rb.velocity = new Vector3(rb.velocity.x, verticalVel, rb.velocity.z);
     }
 
     private void OnDestroy()

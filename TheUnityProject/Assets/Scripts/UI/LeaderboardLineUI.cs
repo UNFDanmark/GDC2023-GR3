@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,12 @@ public class LeaderboardLineUI : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI nameText;
     [SerializeField] public TextMeshProUGUI timeText;
+    [SerializeField] public TMP_InputField nameInput;
+
+    private void Awake()
+    {
+        nameInput.gameObject.SetActive(false);
+    }
 
     public void SetText(string newName, string newTime)
     {

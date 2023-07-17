@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class MainMenuUI : MonoBehaviour
 {
+    private const string path = "/HIGHSCORES.txt";
+    
     [SerializeField] private Button startButton;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button leaderboardButton;
@@ -35,7 +38,7 @@ public class MainMenuUI : MonoBehaviour
         }); 
         deleteHighscoresButton.onClick.AddListener(() =>
         {
-            PlayerPrefs.DeleteAll();
+            File.Delete(Application.persistentDataPath + path);
         });
     }
 }

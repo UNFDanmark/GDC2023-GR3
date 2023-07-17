@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,14 @@ using UnityEngine.UI;
 
 public class ReturnButton : MonoBehaviour
 {
+    public event EventHandler OnPress;
+    
     [SerializeField] private Button returnButton;
-    // Start is called before the first frame update
     void Start()
     {
         returnButton.onClick.AddListener(() =>
         {
+            OnPress?.Invoke(this, EventArgs.Empty);
             SceneManager.LoadScene(0);
         });
     }

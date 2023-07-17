@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PostGameSceneUI : MonoBehaviour
 {
@@ -11,18 +12,18 @@ public class PostGameSceneUI : MonoBehaviour
     private const string path = "/HIGHSCORES.txt";
 
     [SerializeField] private bool testMode;
-    [SerializeField] private TextMeshProUGUI playerTimeText;
     [SerializeField] private LeaderboardLineUI[] lines;
+    [SerializeField] private ReturnButton returnButton;
     
     private void Start()
     {
-        HighscoreEntry[] entries;
+        HighscoreList highscoreList;
         
         if (!File.Exists(Application.persistentDataPath + path))
         {
             //If no file - create file with empty entries and new player entry
             
-            entries = HandleMissingFile();
+            highscoreList = HandleMissingFile();
         }
         else
         {
@@ -32,33 +33,28 @@ public class PostGameSceneUI : MonoBehaviour
             string text = sr.ReadToEnd();
             sr.Close();
             
-            HighscoreList highscoreList = JsonUtility.FromJson<HighscoreList>(text);
-            entries = highscoreList.highscores;
+            highscoreList = JsonUtility.FromJson<HighscoreList>(text);
         }
 
         if (testMode)
         {
-            HandleTest(entries);
+            HandleTest(highscoreList);
         }
         else
         {
-            HandlePlayerWon(entries);
+            HandlePlayerWon(highscoreList);
         }
     }
 
-    private HighscoreEntry[] HandleMissingFile()
+    private HighscoreList HandleMissingFile()
     {
         StreamWriter sw = new StreamWriter(Application.persistentDataPath + path);
 
         HighscoreList highscoreList = new HighscoreList();
-
-        float currentTime = PlayerPrefs.GetFloat(PLAYERPREFS_CURRENTSCORE);
-        PlayerPrefs.DeleteKey(PLAYERPREFS_CURRENTSCORE);
+        
         PlayerPrefs.Save();
-        
-        highscoreList.highscores[0] = new HighscoreEntry(GetPlayerName(), 75f);
-        
-        for (int i = 1; i < highscoreList.highscores.Length; i++)
+
+        for (int i = 0; i < highscoreList.highscores.Length; i++)
         {
             highscoreList.highscores[i] = new HighscoreEntry("Empty", -1f);
         }
@@ -68,16 +64,22 @@ public class PostGameSceneUI : MonoBehaviour
         sw.Write(json);
         sw.Close();
 
-        return highscoreList.highscores;
+        return highscoreList;
     }
 
-    private void HandlePlayerWon(HighscoreEntry[] entries)
+    private void HandlePlayerWon(HighscoreList highscoreList)
     {
-        //string playerName = GetPlayerName();
+        if (!PlayerPrefs.HasKey(PLAYERPREFS_CURRENTSCORE))
+        {
+            Debug.LogError("No player time found!");
+            return;
+        }
         
         float currentTime = PlayerPrefs.GetFloat(PLAYERPREFS_CURRENTSCORE);
         PlayerPrefs.DeleteKey(PLAYERPREFS_CURRENTSCORE);
         PlayerPrefs.Save();
+
+        HighscoreEntry[] entries = highscoreList.highscores;
         
         //Player's score's index on leaderboard - 0 is top
         //is -1 if not on leaderboard
@@ -85,54 +87,107 @@ public class PostGameSceneUI : MonoBehaviour
 
         for (int i = 0; i < entries.Length; i++)
         {
-            if (currentTime < entries[i].time)
+            if (currentTime < entries[i].time || entries[i].time < 0)
             {
                 playerEntryIndexInLeaderboard = i;
                 break;
             }
         }
 
+        if (playerEntryIndexInLeaderboard < 0)
+        {
+            Debug.Log("Player did not beat any highscore");
+            UpdateUI(entries);
+            return;
+        }
+        
         for (int i = entries.Length - 1; i > playerEntryIndexInLeaderboard; i--)
         {
+            if (i <= 0) break;
+            
             entries[i] = entries[i - 1];
         }
         
+        UpdateUI(entries, playerEntryIndexInLeaderboard, currentTime);
+
+        lines[playerEntryIndexInLeaderboard].nameText.gameObject.SetActive(false);
+        lines[playerEntryIndexInLeaderboard].nameInput.gameObject.SetActive(true);
+        lines[playerEntryIndexInLeaderboard].nameInput.Select();
         
+        SetEvents(highscoreList, playerEntryIndexInLeaderboard, currentTime);
     }
 
-    private string GetPlayerName()
+    private void SetEvents(HighscoreList highscoreList, int playerEntryIndexInLeaderboard, float currentTime)
     {
-        int stringlen = 4;
-        int randValue;
-        char letter;
-        string name = "";
-        
-        for (int i = 0; i < stringlen; i++)
+        //Keep name-input selected
+        lines[playerEntryIndexInLeaderboard].nameInput.onDeselect.AddListener((string message) =>
         {
-  
-            // Generating a random number.
-            randValue = UnityEngine.Random.Range(0,26);
-  
-            // Generating random character by converting
-            // the random number into character.
-            letter = Convert.ToChar(randValue + 65);
-  
-            // Appending the letter to string.
-            name = name + letter;
-        }
+            lines[playerEntryIndexInLeaderboard].nameInput.Select();
+        });
 
-        return name;
+        //Save and change scene on submit
+        lines[playerEntryIndexInLeaderboard].nameInput.onSubmit.AddListener((string message) =>
+        {
+            SubmitName(highscoreList, playerEntryIndexInLeaderboard, message, currentTime);
+            SceneManager.LoadScene(0);
+        });
+        
+        //Save on pressing return button
+        returnButton.OnPress += (object sender, EventArgs e) =>
+        {
+            string playerName = lines[playerEntryIndexInLeaderboard].nameInput.text;
+            SubmitName(highscoreList, playerEntryIndexInLeaderboard, playerName, currentTime);
+        };
     }
 
-    private void HandleTest(HighscoreEntry[] entries)
+    private void SubmitName(HighscoreList highscoreList, int playerIndexInLeaderboard, string _name, float _time)
     {
-        UpdateUI(entries);
+        HighscoreEntry[] entries = highscoreList.highscores;
+        
+        entries[playerIndexInLeaderboard] = new HighscoreEntry(_name, _time);
+            
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + path);
+
+        string json = JsonUtility.ToJson(highscoreList);
+        
+        sw.Write(json);
+        
+        sw.Close();
+    }
+
+    private void HandleTest(HighscoreList highscoreList)
+    {
+        UpdateUI(highscoreList.highscores);
     }
 
     private void UpdateUI(HighscoreEntry[] entries)
     {
         for (int i = 0; i < lines.Length; i++)
         {
+            HighscoreEntry entry = entries[i];
+
+            string name = entry.name;
+            float time = entry.time;
+
+            string timeString = TimeConverter.TimeFloatToString(time);
+
+            lines[i].timeText.text = timeString;
+            lines[i].nameText.text = name;
+        }
+    }
+    
+    private void UpdateUI(HighscoreEntry[] entries, int ignoreIndex, float ignoreIndexTime)
+    {
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (i == ignoreIndex)
+            {
+                lines[i].nameText.gameObject.SetActive(false);
+                lines[i].timeText.text = TimeConverter.TimeFloatToString(ignoreIndexTime);
+                
+                continue;
+            }
+            
             HighscoreEntry entry = entries[i];
 
             string name = entry.name;
