@@ -19,17 +19,17 @@ public class MainMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(1);
+            SceneHandler.Instance.LoadScene(1);
         });  
         
         controlsButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(2);
+            SceneHandler.Instance.LoadScene(2);
         }); 
         
         leaderboardButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(3);
+            SceneHandler.Instance.LoadScene(3);
         }); 
         
         quitButton.onClick.AddListener(() =>

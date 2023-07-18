@@ -10,7 +10,7 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(0);
+            SceneHandler.Instance.LoadScene(0);
         }
     }
 }
