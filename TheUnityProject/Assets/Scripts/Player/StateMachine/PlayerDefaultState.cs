@@ -17,7 +17,7 @@ public class PlayerDefaultState : State
         float turnInput = Input.GetAxis("Horizontal");
         float moveInput = Input.GetAxis("Vertical");
         
-        stateMachine.transform.Rotate(0, turnInput * stateMachine.turnSpeed * Time.deltaTime, 0);
+        stateMachine.transform.Rotate(0, turnInput * stateMachine.turnSpeed * delta, 0);
 
         HandleForwardMovement(moveInput, delta);
         
@@ -44,7 +44,8 @@ public class PlayerDefaultState : State
         else
         {
             Debug.Log($"Default verticalSpeed: {stateMachine.verticalVel}");
-            stateMachine.verticalVel = stateMachine.rb.velocity.y;
+            stateMachine.verticalVel = 0f;  //
+            //stateMachine.verticalVel = stateMachine.rb.velocity.y;
         }
 
         Vector3 vel = stateMachine.transform.forward * stateMachine.forwardVel + stateMachine.transform.up * stateMachine.verticalVel;

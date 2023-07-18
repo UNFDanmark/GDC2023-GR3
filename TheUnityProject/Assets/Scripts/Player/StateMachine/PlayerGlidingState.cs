@@ -22,6 +22,10 @@ public class PlayerGlidingState : State
         float turnInput = Input.GetAxis("Horizontal");
         stateMachine.transform.Rotate(0, turnInput * stateMachine.glidingTurnSpeed * delta, 0);
 
+        //Quaternion newRotation = stateMachine.transform.rotation * Quaternion.Euler(new Vector3(0, turnInput * stateMachine.glidingTurnSpeed * delta, 0));
+
+        //stateMachine.rb.MoveRotation(newRotation);
+        
         if (stateMachine.verticalVel > 0)
         {
             stateMachine.verticalVel += stateMachine.defaultGravity * delta;
