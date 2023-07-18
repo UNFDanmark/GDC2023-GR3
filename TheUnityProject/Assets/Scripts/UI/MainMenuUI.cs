@@ -20,17 +20,17 @@ public class MainMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex, SceneLoadType.Load);
         });  
         
         controlsButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex, SceneLoadType.Load);
         }); 
         
         leaderboardButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.leaderboardSceneIndex);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.leaderboardSceneIndex, SceneLoadType.Load);
         }); 
         
         quitButton.onClick.AddListener(() =>

@@ -27,6 +27,6 @@ public class WinArea : MonoBehaviour
             PlayerPrefs.SetFloat(PLAYERPREFS_CURRENTSCORE, gameTime);
         }
 
-        SceneHandler.Instance.LoadScene(SceneHandler.Instance.postGameScene);
+        SceneHandler.Instance.LoadScene(SceneHandler.Instance.postGameScene, SceneLoadType.Load);
     }
 }
