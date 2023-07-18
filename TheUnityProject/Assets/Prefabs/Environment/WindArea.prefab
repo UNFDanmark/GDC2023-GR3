@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4861,7 +4861,7 @@ Transform:
   m_Children:
   - {fileID: 4120376723684804361}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2027516434660815479
 CapsuleCollider:
@@ -4900,3 +4900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windForce: 30
   PlayerState: {fileID: 0}
+  startDelayDuration: 0
+  windDurationShort: 0
+  windDurationLong: 0
+  particleSystem: {fileID: 0}

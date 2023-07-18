@@ -23,8 +23,10 @@ public class SceneHandler : MonoBehaviour
     [SerializeField] private float startFadeWaitTime = 0.5f; /*Amount of seconds before the screen starts to fade out,*/
     [SerializeField] private float fadeWaitTime = 0.5f; /*The amount of seconds the screen remains black.*/
     
+    [Header("References")]
     [SerializeField] private CanvasGroup canvasGroup;
 
+    public SceneLoadType SceneLoadType;
     private Coroutine currentActiveFade;
     private bool isLoading;
     
@@ -43,10 +45,12 @@ public class SceneHandler : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
-    public void LoadScene(int index)
+    public void LoadScene(int index, SceneLoadType _sceneLoadType)
     {
         if (isLoading) return;
 
+        SceneLoadType = _sceneLoadType;
+        
         StartCoroutine(Transition(index));
     }
 

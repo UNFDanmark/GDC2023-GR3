@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindArea : MonoBehaviour
+public class WindArea : MonoBehaviour, IStartable
 {
 
     [SerializeField] private float windForce;
@@ -16,7 +16,7 @@ public class WindArea : MonoBehaviour
     [SerializeField] private float windDurationLong;
     [SerializeField] private ParticleSystem particleSystem;
 
-    private void Start()
+    public void StartGame()
     {
         StartCoroutine(Run());
     }

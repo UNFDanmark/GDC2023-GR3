@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    public static PlayerStateMachine Instance { get; private set; }
+    
     private const string GROUND_TAG = "Ground";
     
     public float defaultMoveSpeed;
@@ -47,9 +50,17 @@ public class PlayerStateMachine : MonoBehaviour
     public float inAirLerpConstantDeaccelerationPerSecond;
 
     private State currentState;
-    
-    private void Start()
+    private bool gameStarted;
+
+    private void Awake()
     {
+        gameStarted = false;
+        Instance = this;
+    }
+
+    public void StartPlayer()
+    {
+        gameStarted = true;
         currentState = new PlayerDefaultState(this);
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +69,8 @@ public class PlayerStateMachine : MonoBehaviour
     
     private void Update()
     {
+        if (!gameStarted) return;
+        
         currentState.Tick(Time.deltaTime);
     }
     
