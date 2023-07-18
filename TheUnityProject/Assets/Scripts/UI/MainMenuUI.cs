@@ -10,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     private const string path = "/HIGHSCORES.txt";
     
     [SerializeField] private Button startButton;
+    [SerializeField] private Button tutorialButton;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button leaderboardButton;
     [SerializeField] private Button quitButton;
@@ -19,17 +20,17 @@ public class MainMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(1);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex);
         });  
         
         controlsButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(2);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex);
         }); 
         
         leaderboardButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(3);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.leaderboardSceneIndex);
         }); 
         
         quitButton.onClick.AddListener(() =>

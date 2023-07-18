@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -47,7 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float inAirLerpDampeningConstant;
 
     public float inAirLerpConstantDeaccelerationPerSecond;
-    
+
     private State currentState;
     
     private void Start()
@@ -62,7 +60,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         currentState.Tick(Time.deltaTime);
     }
-
+    
     public void ChangeState(State newState)
     {
         currentState?.Exit();

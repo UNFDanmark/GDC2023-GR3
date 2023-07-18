@@ -9,6 +9,15 @@ public class SceneHandler : MonoBehaviour
 {
     public static SceneHandler Instance { get; private set; }
 
+    [Header("Scene indexes")]
+    public int mainMenuSceneIndex;
+    public int gameSceneIndex;
+    public int postGameScene;
+    public int tutorialSceneIndex; 
+    public int controlsSceneIndex;
+    public int leaderboardSceneIndex;
+        
+    [Header("Fading")]
     [SerializeField] private float fadeOutTime = 1f; /*Amount of seconds it takes to fade to black.*/
     [SerializeField] private float fadeInTime = 2f; /*Amount of seconds it takes to fade back in.*/
     [SerializeField] private float startFadeWaitTime = 0.5f; /*Amount of seconds before the screen starts to fade out,*/

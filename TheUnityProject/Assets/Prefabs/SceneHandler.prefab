@@ -110,7 +110,7 @@ RectTransform:
   m_Children:
   - {fileID: 3969962623951506182}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -187,6 +187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debcf1fb1f00c8342b08305d3f44f831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuSceneIndex: 0
+  gameSceneIndex: 1
+  postGameScene: 2
+  tutorialSceneIndex: 3
+  controlsSceneIndex: 4
+  leaderboardSceneIndex: 5
   fadeOutTime: 0.5
   fadeInTime: 1
   startFadeWaitTime: 0.5

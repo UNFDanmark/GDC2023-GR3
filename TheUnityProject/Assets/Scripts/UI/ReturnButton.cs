@@ -14,7 +14,7 @@ public class ReturnButton : MonoBehaviour
         returnButton.onClick.AddListener(() =>
         {
             OnPress?.Invoke(this, EventArgs.Empty);
-            SceneHandler.Instance.LoadScene(0);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.mainMenuSceneIndex);
         });
     }
 

@@ -18,9 +18,10 @@ public class PlayerGlidingState : State
             stateMachine.ChangeState(new PlayerDefaultState(stateMachine));
             return;
         }
-        
+
         float turnInput = Input.GetAxis("Horizontal");
-        stateMachine.transform.Rotate(0, turnInput * stateMachine.glidingTurnSpeed * delta, 0);
+        float turnAmount = turnInput * stateMachine.glidingTurnSpeed * delta;
+        stateMachine.transform.Rotate(0, turnAmount , 0);
 
         //Quaternion newRotation = stateMachine.transform.rotation * Quaternion.Euler(new Vector3(0, turnInput * stateMachine.glidingTurnSpeed * delta, 0));
 
