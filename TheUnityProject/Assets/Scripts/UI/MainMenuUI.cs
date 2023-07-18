@@ -23,6 +23,11 @@ public class MainMenuUI : MonoBehaviour
             SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex, SceneLoadType.Load);
         });  
         
+        tutorialButton.onClick.AddListener(() =>
+        {
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.tutorialSceneIndex, SceneLoadType.Load);
+        });  
+        
         controlsButton.onClick.AddListener(() =>
         {
             SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex, SceneLoadType.Load);

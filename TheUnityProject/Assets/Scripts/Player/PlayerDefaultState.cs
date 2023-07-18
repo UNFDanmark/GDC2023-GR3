@@ -43,9 +43,7 @@ public class PlayerDefaultState : State
         }
         else
         {
-            Debug.Log($"Default verticalSpeed: {stateMachine.verticalVel}");
             stateMachine.verticalVel = 0f;  //
-            //stateMachine.verticalVel = stateMachine.rb.velocity.y;
         }
 
         Vector3 vel = stateMachine.transform.forward * stateMachine.forwardVel + stateMachine.transform.up * stateMachine.verticalVel;

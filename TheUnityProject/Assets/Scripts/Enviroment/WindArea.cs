@@ -7,7 +7,7 @@ public class WindArea : MonoBehaviour, IStartable
 {
 
     [SerializeField] private float windForce;
-    [SerializeField] private PlayerStateMachine PlayerState;
+    private PlayerStateMachine playerStateMachine;
     private bool Blow;
     private bool playerInWind;
     private float timer;
@@ -18,6 +18,7 @@ public class WindArea : MonoBehaviour, IStartable
 
     public void StartGame()
     {
+        playerStateMachine = PlayerStateMachine.Instance;
         StartCoroutine(Run());
     }
     
@@ -58,7 +59,7 @@ public class WindArea : MonoBehaviour, IStartable
             particleSystem.Stop();
             yield return new WaitForSeconds(windDurationShort);
             Blow = false;
-            yield return new WaitForSeconds(windDurationLong);
+            yield return new WaitForSeconds(windDurationShort);
         }
     }
 
@@ -66,7 +67,7 @@ public class WindArea : MonoBehaviour, IStartable
     {
         if (Blow && playerInWind)
         {
-            PlayerState.AddVerticalVelocity(windForce * Time.fixedDeltaTime);
+            playerStateMachine.AddVerticalVelocity(windForce * Time.fixedDeltaTime);
         }
     }
 
