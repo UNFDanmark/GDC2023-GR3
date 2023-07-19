@@ -138,8 +138,8 @@ MonoBehaviour:
   forwardVel: 0
   verticalVel: 0
   isGrounded: 0
-  jumpClip: {fileID: 0}
-  doubleJumpClip: {fileID: 0}
+  jumpClip: {fileID: 8300000, guid: 6bc8d224eec639f49bba01f4eb4b7b5c, type: 3}
+  doubleJumpClip: {fileID: 8300000, guid: 3bdc3d9dad1cb4d45adfa7c1db61295c, type: 3}
   deaccelerationMethod: 1
   constantDeaccelerationPerSecond: 3
   groundedLerpDampeningConstant: 14
