@@ -55,58 +55,70 @@ public class SceneHandler : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
-    public void LoadScene(int index, SceneLoadType _sceneLoadType)
+    public void LoadScene(int index, AudioClip clip, SceneLoadType _sceneLoadType)
     {
         if (isLoading) return;
 
         SceneLoadType = _sceneLoadType;
         
-        StartCoroutine(Transition(index));
+        StartCoroutine(Transition(index, clip));
     }
 
-    private IEnumerator Transition(int index)
+    private IEnumerator Transition(int index, AudioClip clip)
     {
         isLoading = true;
+        bool shouldChangeMusic = MusicPlayer.Instance.GetClip() != clip;
 
         yield return new WaitForSeconds(startFadeWaitTime);
 
-        yield return FadeOut(fadeOutTime);
+        yield return FadeOut(fadeOutTime, shouldChangeMusic);
 
         yield return SceneManager.LoadSceneAsync(index);
 
         yield return new WaitForSeconds(fadeWaitTime);
 
-        FadeIn(fadeInTime);
+        if (shouldChangeMusic)
+        {
+            MusicPlayer.Instance.SetClip(clip);
+        }
+
+        FadeIn(fadeInTime, shouldChangeMusic);
         
         isLoading = false;
     }
     
-    private Coroutine FadeOut(float time)
+    private Coroutine FadeOut(float time, bool shouldChangeMusic)
     {
-        return Fade(1, 0, time);
+        return Fade(1, 0, time, shouldChangeMusic);
     }
 
-    private Coroutine FadeIn(float time)
+    private Coroutine FadeIn(float time, bool shouldChangeMusic)
     {
-        return Fade(0, 1, time);
+        return Fade(0, 1, time, shouldChangeMusic);
     }
 
-    private Coroutine Fade(float alphaTarget, float audioTarget, float time)
+    private Coroutine Fade(float alphaTarget, float audioTarget, float time, bool shouldChangeMusic)
     {
         if (currentActiveFade != null)
         {
             StopCoroutine(currentActiveFade);
         }
 
-        currentActiveFade = StartCoroutine(FadeRoutine(alphaTarget, audioTarget, time));
+        currentActiveFade = StartCoroutine(FadeRoutine(alphaTarget, audioTarget, time, shouldChangeMusic));
         return currentActiveFade;
     }
 
-    private IEnumerator FadeRoutine(float alphaTarget, float audioTarget, float time)
+    private IEnumerator FadeRoutine(float alphaTarget, float audioTarget, float time, bool shouldChangeMusic)
     {
         while (!Mathf.Approximately(canvasGroup.alpha, alphaTarget))
         {
             canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, alphaTarget, Time.deltaTime / time);
+
+            if (shouldChangeMusic)
+            {
+                MusicPlayer.Instance.SetVolume(Mathf.MoveTowards(MusicPlayer.Instance.GetVolume(), audioTarget,
+                    Time.deltaTime / time));
+            }
 
             yield return null;
         }

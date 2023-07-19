@@ -20,22 +20,22 @@ public class MainMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex, MusicPlayer.Instance.gameMusic, SceneLoadType.Load);
         });  
         
         tutorialButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.tutorialSceneIndex, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.tutorialSceneIndex, MusicPlayer.Instance.gameMusic, SceneLoadType.Load);
         });  
         
         controlsButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.controlsSceneIndex, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
         }); 
         
         leaderboardButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.leaderboardSceneIndex, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.leaderboardSceneIndex, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
         }); 
         
         quitButton.onClick.AddListener(() =>

@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 public class WinArea : MonoBehaviour
 {
     private const string PLAYERPREFS_CURRENTSCORE = "CurrentScore";
+
+    private int openHash = Animator.StringToHash("Open");
     
+    [SerializeField] private float waitTime;
+    [SerializeField] private Animator animator;
     [SerializeField] private Timer timer;
 
     private bool hasWon = false;
@@ -16,6 +20,8 @@ public class WinArea : MonoBehaviour
     {
         if (hasWon) return;
         if (!other.CompareTag("Player")) return;
+
+        animator.SetTrigger(openHash);
         
         hasWon = true;
 
@@ -27,6 +33,13 @@ public class WinArea : MonoBehaviour
             PlayerPrefs.SetFloat(PLAYERPREFS_CURRENTSCORE, gameTime);
         }
 
-        SceneHandler.Instance.LoadScene(SceneHandler.Instance.postGameScene, SceneLoadType.Load);
+        StartCoroutine(LoadScene());
+    }
+
+    private IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(waitTime);
+        
+        SceneHandler.Instance.LoadScene(SceneHandler.Instance.postGameScene, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
     }
 }

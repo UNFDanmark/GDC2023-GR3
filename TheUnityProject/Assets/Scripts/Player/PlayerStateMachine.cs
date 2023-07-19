@@ -22,6 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float maxHorizontalSpeed;
     public float glidingAccelerationPerSecond;
     public Rigidbody rb;
+    public Animator animator;
 
     public int jumpsSinceGrounded = 0;
     public int groundsTouched = 0;
@@ -56,6 +57,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         gameStarted = false;
         Instance = this;
+    }
+
+    private void Start()
+    {
+        animator.SetFloat("LocomotionBlend", 0.5f);
     }
 
     public void StartPlayer()

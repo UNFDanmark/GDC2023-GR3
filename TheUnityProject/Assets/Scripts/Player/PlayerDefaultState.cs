@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerDefaultState : State
 {
+    private int isFallingHash = Animator.StringToHash("isFalling");
+    private int isGlidingHash = Animator.StringToHash("isGliding");
+    private int locomotionHash = Animator.StringToHash("LocomotionBlend");
+    private int jumpHash = Animator.StringToHash("Jump");
+    
     public PlayerDefaultState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -26,11 +31,13 @@ public class PlayerDefaultState : State
             if (stateMachine.isGrounded)
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
+                stateMachine.animator.SetTrigger(jumpHash);
             }
             else if (stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
                 stateMachine.jumpsSinceGrounded++;
+                stateMachine.animator.SetTrigger(jumpHash);
             }
             
             stateMachine.ChangeState(new PlayerGlidingState(stateMachine));
@@ -43,11 +50,26 @@ public class PlayerDefaultState : State
         }
         else
         {
-            stateMachine.verticalVel = 0f;  //
+            stateMachine.verticalVel = 0f;
         }
 
         Vector3 vel = stateMachine.transform.forward * stateMachine.forwardVel + stateMachine.transform.up * stateMachine.verticalVel;
         stateMachine.rb.velocity = vel;
+
+        UpdateAnimation(moveInput);
+    }
+
+    private void UpdateAnimation(float moveInput)
+    {
+        if (stateMachine.isGrounded)
+        {
+            stateMachine.animator.SetBool(isFallingHash, false);
+            stateMachine.animator.SetFloat(locomotionHash, moveInput/2f + 0.5f);
+        }
+        else
+        {
+            stateMachine.animator.SetBool(isFallingHash, true);
+        }
     }
 
     private void HandleForwardMovement(float moveInput, float delta)
@@ -108,5 +130,6 @@ public class PlayerDefaultState : State
     
     public override void Exit()
     {
+        stateMachine.animator.SetBool(isFallingHash, false);
     }
 }
