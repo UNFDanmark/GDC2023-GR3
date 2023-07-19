@@ -22,6 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float maxHorizontalSpeed;
     public float glidingAccelerationPerSecond;
     public Rigidbody rb;
+    public Animator animator;
 
     public int jumpsSinceGrounded = 0;
     public int groundsTouched = 0;
@@ -49,6 +50,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public float inAirLerpConstantDeaccelerationPerSecond;
 
+    private int landHash = Animator.StringToHash("Land");
     private State currentState;
     private bool gameStarted;
 
@@ -56,6 +58,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         gameStarted = false;
         Instance = this;
+    }
+
+    private void Start()
+    {
+        animator.SetFloat("LocomotionBlend", 0.5f);
     }
 
     public void StartPlayer()
@@ -87,6 +94,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag(GROUND_TAG))
         {
+            if (groundsTouched == 0)
+            {
+                animator.SetTrigger(landHash);
+            }
+            
             groundsTouched++;
             jumpsSinceGrounded = 0;
         }

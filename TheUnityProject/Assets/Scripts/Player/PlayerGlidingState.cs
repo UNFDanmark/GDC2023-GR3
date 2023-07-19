@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerGlidingState : State
 {
+    private int isGlidingHash = Animator.StringToHash("isGliding");
+    
     public PlayerGlidingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
-    { }
+    {
+        stateMachine.animator.SetBool(isGlidingHash, true);
+    }
 
     public override void Tick(float delta)
     {
@@ -45,5 +49,7 @@ public class PlayerGlidingState : State
     }
 
     public override void Exit()
-    { }
+    {
+        stateMachine.animator.SetBool(isGlidingHash, false);
+    }
 }

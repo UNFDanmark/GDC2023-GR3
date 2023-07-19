@@ -15,35 +15,15 @@ public class WindArea : MonoBehaviour, IStartable
     [SerializeField] private float windDurationShort;
     [SerializeField] private float windDurationLong;
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private float audioFadeTime;
+    [SerializeField] private AudioSource audioSource;
 
+    private Coroutine currentActiveFade;
+    
     public void StartGame()
     {
         playerStateMachine = PlayerStateMachine.Instance;
         StartCoroutine(Run());
-    }
-    
-    private void Update()
-    {
-        /*
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            timer = windDuration;
-
-            switch (Blow)
-            {
-                case true:
-                    particleSystem.Stop();
-                    Blow = false;
-                    break;
-                case false:
-                    particleSystem.Play();
-                    Blow = true;
-                    break;
-            }
-        }
-        */
     }
 
     private IEnumerator Run()
@@ -53,14 +33,40 @@ public class WindArea : MonoBehaviour, IStartable
         while (true)
         {
             Blow = true;
+            audioSource.Play();
+            StartFade(1);
             yield return new WaitForSeconds(windDurationShort);
             particleSystem.Play();
             yield return new WaitForSeconds(windDurationLong);
             particleSystem.Stop();
+            StartFade(0);
+            audioSource.Stop();
             yield return new WaitForSeconds(windDurationShort);
             Blow = false;
             yield return new WaitForSeconds(windDurationShort);
         }
+    }
+
+    
+    private void StartFade(float targetAudio)
+    {
+        if (currentActiveFade != null)
+        {
+            StopCoroutine(currentActiveFade);
+        }
+
+        currentActiveFade = StartCoroutine(Fade(targetAudio, audioFadeTime));
+    }
+
+    private IEnumerator Fade(float targetVolume, float time)
+    {
+        while (!Mathf.Approximately(audioSource.volume, targetVolume))
+        {
+            audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume,
+                Time.deltaTime / time);
+            yield return null;
+        }
+
     }
 
     private void FixedUpdate()

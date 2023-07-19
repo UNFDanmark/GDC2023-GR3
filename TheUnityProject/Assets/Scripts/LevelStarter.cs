@@ -63,7 +63,7 @@ public class LevelStarter : MonoBehaviour
         
         mainMenuButton.onClick.AddListener(() =>
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.mainMenuSceneIndex, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.mainMenuSceneIndex, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
         });
     }
 }
