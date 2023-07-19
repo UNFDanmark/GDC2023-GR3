@@ -50,6 +50,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public float inAirLerpConstantDeaccelerationPerSecond;
 
+    private int landHash = Animator.StringToHash("Land");
     private State currentState;
     private bool gameStarted;
 
@@ -93,6 +94,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag(GROUND_TAG))
         {
+            if (groundsTouched == 0)
+            {
+                animator.SetTrigger(landHash);
+            }
+            
             groundsTouched++;
             jumpsSinceGrounded = 0;
         }
