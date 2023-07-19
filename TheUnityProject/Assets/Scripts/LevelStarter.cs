@@ -9,9 +9,21 @@ public class LevelStarter : MonoBehaviour
     [SerializeField] private GameObject menuParent;
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button mainMenuButton;
-
+    [SerializeField] private bool startImmediateAlways;
     private void Start()
     {
+        if (startImmediateAlways)
+        {
+            StartGame();
+            return;
+        }
+
+        if (SceneHandler.Instance == null)
+        {
+            StartGame();
+            return;
+        }
+        
         if (SceneHandler.Instance.SceneLoadType == SceneLoadType.Load)
         {
             StartGame();
@@ -28,14 +40,21 @@ public class LevelStarter : MonoBehaviour
         {
             startable.StartGame();
         }
-        
+
         PlayerStateMachine.Instance.StartPlayer();
-        menuParent.SetActive(false);
+
+        if (menuParent != null)
+        {
+            menuParent.SetActive(false);
+        }
     }
 
     private void ShowMenu()
     {
-        menuParent.SetActive(true);
+        if (menuParent != null)
+        {
+            menuParent.SetActive(true);
+        }
         
         startGameButton.onClick.AddListener(() =>
         {

@@ -2066,7 +2066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 2140787779}
-  tutorialButton: {fileID: 0}
+  tutorialButton: {fileID: 1903713361}
   controlsButton: {fileID: 1398938844}
   leaderboardButton: {fileID: 1887498442}
   quitButton: {fileID: 2090353835}
