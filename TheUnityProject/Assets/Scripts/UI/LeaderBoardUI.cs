@@ -6,14 +6,14 @@ using System.IO;
 
 public class LeaderBoardUI : MonoBehaviour
 {
-    private const string path = "/HIGHSCORES.txt";
+    [SerializeField] private string defaultPath = "/HIGHSCORES.txt";
     [SerializeField] private LeaderboardLineUI[] lines;
     
     private void Start()
     {
         HighscoreEntry[] entries;
         
-        if (!File.Exists(Application.persistentDataPath + path))
+        if (!File.Exists(Application.persistentDataPath + defaultPath))
         {
             //If no file - create file with empty entries and new player entry
             
@@ -23,7 +23,7 @@ public class LeaderBoardUI : MonoBehaviour
         {
             //if file - read file
             
-            StreamReader sr = new StreamReader(Application.persistentDataPath + path);
+            StreamReader sr = new StreamReader(Application.persistentDataPath + defaultPath);
             string text = sr.ReadToEnd();
             sr.Close();
             
@@ -36,7 +36,7 @@ public class LeaderBoardUI : MonoBehaviour
     
     private HighscoreEntry[] HandleMissingFile()
     {
-        StreamWriter sw = new StreamWriter(Application.persistentDataPath + path);
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + defaultPath);
 
         HighscoreList highscoreList = new HighscoreList();
 
