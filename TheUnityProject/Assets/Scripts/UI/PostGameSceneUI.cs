@@ -21,7 +21,7 @@ public class PostGameSceneUI : MonoBehaviour
 
         string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
 
-        string path = Application.persistentDataPath + sceneName + ".txt";
+        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
         
         if (!File.Exists(path))
         {
@@ -54,11 +54,13 @@ public class PostGameSceneUI : MonoBehaviour
     {
         string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
         
-        string path = Application.persistentDataPath + sceneName + ".txt";
+        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
         
         StreamWriter sw = new StreamWriter(path);
 
         HighscoreList highscoreList = new HighscoreList();
+
+        highscoreList.levelName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
         
         PlayerPrefs.Save();
 
@@ -156,7 +158,7 @@ public class PostGameSceneUI : MonoBehaviour
             
         string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
         
-        string path = Application.persistentDataPath + sceneName + ".txt";
+        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
         
         StreamWriter sw = new StreamWriter(path);
 

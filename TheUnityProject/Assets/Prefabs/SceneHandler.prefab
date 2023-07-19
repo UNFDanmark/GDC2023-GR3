@@ -188,14 +188,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuSceneIndex: 0
-  gameSceneIndex: 1
-  postGameScene: 2
-  tutorialSceneIndex: 3
-  controlsSceneIndex: 4
+  levelOneSceneIndex: 1
+  levelTwoSceneIndex: 2
+  postGameScene: 3
+  tutorialSceneIndex: 4
   leaderboardSceneIndex: 5
   fadeOutTime: 0.25
   fadeInTime: 0.5
   startFadeWaitTime: 0.25
   fadeWaitTime: 0.25
   canvasGroup: {fileID: 1643638224311691956}
+  audioSource: {fileID: 0}
+  fadeOutClip: {fileID: 0}
+  fadeInClip: {fileID: 0}
   SceneLoadType: 0
