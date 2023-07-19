@@ -9449,6 +9449,16 @@ PrefabInstance:
       propertyPath: waitTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 528180155305319278, guid: 8677f8fdcdd62684e8c22d3d53531f20,
+        type: 3}
+      propertyPath: sceneName
+      value: PEAKS
+      objectReference: {fileID: 0}
+    - target: {fileID: 528180155305319278, guid: 8677f8fdcdd62684e8c22d3d53531f20,
+        type: 3}
+      propertyPath: useWithLeaderboard
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2466247204405742522, guid: 8677f8fdcdd62684e8c22d3d53531f20,
         type: 3}
       propertyPath: m_LocalScale.x

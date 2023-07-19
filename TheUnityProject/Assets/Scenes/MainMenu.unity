@@ -824,36 +824,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: postGameScene
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: controlsSceneIndex
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: levelOneSceneIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: levelTwoSceneIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: tutorialSceneIndex
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303873892923146248, guid: c9539ff60d6d3984ea34dd878d327053,
-        type: 3}
-      propertyPath: leaderboardSceneIndex
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7433812017142389930, guid: c9539ff60d6d3984ea34dd878d327053,
         type: 3}
       propertyPath: m_Pivot.x
