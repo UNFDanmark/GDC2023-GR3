@@ -141,7 +141,7 @@ MonoBehaviour:
   isGrounded: 0
   deaccelerationMethod: 1
   constantDeaccelerationPerSecond: 3
-  groundedLerpDampeningConstant: 10
+  groundedLerpDampeningConstant: 14
   groundedLerpConstantDeaccelerationPerSecond: 0.5
   inAirLerpDampeningConstant: 1.5
   inAirLerpConstantDeaccelerationPerSecond: 0.25

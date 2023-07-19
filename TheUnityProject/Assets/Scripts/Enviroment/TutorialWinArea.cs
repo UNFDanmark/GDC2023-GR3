@@ -11,7 +11,7 @@ public class TutorialWinArea : MonoBehaviour
     {
         if (other.CompareTag(PLAYER_TAG))
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.gameSceneIndex, MusicPlayer.Instance.gameMusic, SceneLoadType.Load);
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.levelOneSceneIndex, MusicPlayer.Instance.gameMusic, SceneLoadType.Load);
         }
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour
 {
     public static MusicPlayer Instance { get; private set; }
+
+    [SerializeField] public float maxVolume;
     
     [SerializeField] private AudioSource audioSource;
     [SerializeField] public AudioClip menuMusic;
@@ -30,6 +32,7 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
+        audioSource.volume = maxVolume;
         audioSource.clip = menuMusic;
         
         audioSource.Play();
@@ -56,5 +59,10 @@ public class MusicPlayer : MonoBehaviour
     public void SetVolume(float newVolume)
     {
         audioSource.volume = newVolume;
+    }
+
+    public float GetMaxVolume()
+    {
+        return maxVolume;
     }
 }

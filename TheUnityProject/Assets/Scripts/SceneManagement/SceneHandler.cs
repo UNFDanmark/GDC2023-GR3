@@ -11,10 +11,10 @@ public class SceneHandler : MonoBehaviour
 
     [Header("Scene indexes")]
     public int mainMenuSceneIndex;
-    public int gameSceneIndex;
+    public int levelOneSceneIndex;
+    public int levelTwoSceneIndex;
     public int postGameScene;
-    public int tutorialSceneIndex; 
-    public int controlsSceneIndex;
+    public int tutorialSceneIndex;
     public int leaderboardSceneIndex;
         
     [Header("Fading")]
@@ -26,6 +26,11 @@ public class SceneHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] private CanvasGroup canvasGroup;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip fadeOutClip;
+    [SerializeField] private AudioClip fadeInClip;
+    
     public SceneLoadType SceneLoadType;
     private Coroutine currentActiveFade;
     private bool isLoading;
@@ -71,6 +76,10 @@ public class SceneHandler : MonoBehaviour
 
         yield return new WaitForSeconds(startFadeWaitTime);
 
+        /*
+        audioSource.clip = fadeOutClip;
+        audioSource.Play();
+        */
         yield return FadeOut(fadeOutTime, shouldChangeMusic);
 
         yield return SceneManager.LoadSceneAsync(index);
@@ -81,7 +90,12 @@ public class SceneHandler : MonoBehaviour
         {
             MusicPlayer.Instance.SetClip(clip);
         }
-
+        
+        /*
+        audioSource.clip = fadeInClip;
+        audioSource.Play();
+        */
+        
         FadeIn(fadeInTime, shouldChangeMusic);
         
         isLoading = false;
@@ -89,12 +103,12 @@ public class SceneHandler : MonoBehaviour
     
     private Coroutine FadeOut(float time, bool shouldChangeMusic)
     {
-        return Fade(1, 0, time, shouldChangeMusic);
+        return Fade(MusicPlayer.Instance.GetVolume(), 0, time, shouldChangeMusic);
     }
 
     private Coroutine FadeIn(float time, bool shouldChangeMusic)
     {
-        return Fade(0, 1, time, shouldChangeMusic);
+        return Fade(MusicPlayer.Instance.GetVolume(), MusicPlayer.Instance.GetMaxVolume(), time, shouldChangeMusic);
     }
 
     private Coroutine Fade(float alphaTarget, float audioTarget, float time, bool shouldChangeMusic)

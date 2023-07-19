@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,13 @@ public class LevelStarter : MonoBehaviour
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private bool startImmediateAlways;
+
+    private bool menuOpen;
+        
     private void Start()
     {
+        menuOpen = false;
+        
         if (startImmediateAlways)
         {
             StartGame();
@@ -49,8 +55,21 @@ public class LevelStarter : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!menuOpen) return;
+
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        {
+            menuOpen = false;
+            StartGame();
+        }
+    }
+
     private void ShowMenu()
     {
+        menuOpen = true;
+        
         if (menuParent != null)
         {
             menuParent.SetActive(true);
