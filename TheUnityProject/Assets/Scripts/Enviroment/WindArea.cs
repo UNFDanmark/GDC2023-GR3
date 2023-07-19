@@ -33,14 +33,14 @@ public class WindArea : MonoBehaviour, IStartable
         while (true)
         {
             Blow = true;
-            audioSource.Play();
+            //audioSource.Play();
             StartFade(1);
             yield return new WaitForSeconds(windDurationShort);
             particleSystem.Play();
             yield return new WaitForSeconds(windDurationLong);
             particleSystem.Stop();
             StartFade(0);
-            audioSource.Stop();
+            //audioSource.Stop();
             yield return new WaitForSeconds(windDurationShort);
             Blow = false;
             yield return new WaitForSeconds(windDurationShort);
@@ -62,8 +62,8 @@ public class WindArea : MonoBehaviour, IStartable
     {
         while (!Mathf.Approximately(audioSource.volume, targetVolume))
         {
-            audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume,
-                Time.deltaTime / time);
+            //audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume,
+            //    Time.deltaTime / time);
             yield return null;
         }
 

@@ -7,6 +7,7 @@ public class HighscoreList
     {
         highscores = new HighscoreEntry[10];
     }
-    
+
+    public string levelName;
     public HighscoreEntry[] highscores;
 }
