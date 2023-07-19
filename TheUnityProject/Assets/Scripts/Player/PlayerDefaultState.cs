@@ -32,12 +32,15 @@ public class PlayerDefaultState : State
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
                 stateMachine.animator.SetTrigger(jumpHash);
+                
+                AudioSource.PlayClipAtPoint(stateMachine.jumpClip, Camera.main.transform.position);
             }
             else if (stateMachine.jumpsSinceGrounded < stateMachine.midAirJumps)
             {
                 stateMachine.verticalVel = stateMachine.jumpSpeed;
                 stateMachine.jumpsSinceGrounded++;
                 stateMachine.animator.SetTrigger(jumpHash);
+                AudioSource.PlayClipAtPoint(stateMachine.doubleJumpClip, Camera.main.transform.position);
             }
             
             stateMachine.ChangeState(new PlayerGlidingState(stateMachine));

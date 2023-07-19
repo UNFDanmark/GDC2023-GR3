@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc983c4850c95dc49959e7e715639ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVolume: 0.15
   audioSource: {fileID: 4084912527224390609}
-  menuMusic: {fileID: 8300000, guid: 1cd5936d48af27849af44b25e7eed8b7, type: 3}
-  gameMusic: {fileID: 8300000, guid: 8c6651d268cf7d74e9fce9a80d851a09, type: 3}
+  menuMusic: {fileID: 8300000, guid: 6f9182a13acacfc45aca6b9e7d02f495, type: 3}
+  gameMusic: {fileID: 8300000, guid: 9ea835529cc127d45a5ddd028542db61, type: 3}
