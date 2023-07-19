@@ -23,6 +23,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float glidingAccelerationPerSecond;
     public Rigidbody rb;
     public Animator animator;
+    public AudioSource audioSource;
 
     public int jumpsSinceGrounded = 0;
     public int groundsTouched = 0;
@@ -30,6 +31,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float verticalVel;
     public bool isGrounded = false;
 
+    [Header("Audio")] 
+    public AudioClip jumpClip;
+    public AudioClip doubleJumpClip;
+    
     public enum DeaccelerationMethod
     {
         constant, 
