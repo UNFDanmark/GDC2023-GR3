@@ -8,7 +8,7 @@ public class PlayerDefaultState : State
     private int isGlidingHash = Animator.StringToHash("isGliding");
     private int locomotionHash = Animator.StringToHash("LocomotionBlend");
     private int jumpHash = Animator.StringToHash("Jump");
-    
+
     public PlayerDefaultState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
