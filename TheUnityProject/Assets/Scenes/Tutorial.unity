@@ -3749,6 +3749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 3
   animator: {fileID: 2110088478}
+  winClip: {fileID: 8300000, guid: e2917b287d822594abde0562f988367a, type: 3}
 --- !u!65 &2110088482
 BoxCollider:
   m_ObjectHideFlags: 0

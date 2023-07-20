@@ -11,6 +11,7 @@ public class TutorialWinArea : MonoBehaviour
     
     [SerializeField] private float waitTime;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip winClip;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -21,6 +22,8 @@ public class TutorialWinArea : MonoBehaviour
                 animator.SetTrigger(openHash);
             }
 
+            AudioSource.PlayClipAtPoint(winClip, Camera.main.transform.position, 0.5f);
+            
             StartCoroutine(LoadScene());
         }
     }

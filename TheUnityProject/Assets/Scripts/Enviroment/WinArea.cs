@@ -17,6 +17,7 @@ public class WinArea : MonoBehaviour
     [SerializeField] private float waitTime;
     [SerializeField] private Animator animator;
     [SerializeField] private Timer timer;
+    [SerializeField] private AudioClip winClip;
 
     private bool hasWon = false;
 
@@ -42,6 +43,11 @@ public class WinArea : MonoBehaviour
             PlayerPrefs.SetFloat(PLAYERPREFS_CURRENTSCORE, gameTime);
             PlayerPrefs.SetString(PLAYERPREFS_LEVELNAME, levelName);
             PlayerPrefs.SetString(PLAYERPREFS_LEVELPATH, levelPath);
+        }
+
+        if (winClip != null)
+        {
+            AudioSource.PlayClipAtPoint(winClip, Camera.main.transform.position, 0.5f);
         }
 
         StartCoroutine(LoadScene());
