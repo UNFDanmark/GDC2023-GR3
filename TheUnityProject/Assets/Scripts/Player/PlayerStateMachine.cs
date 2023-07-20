@@ -31,6 +31,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float verticalVel;
     public bool isGrounded = false;
 
+    public bool startGrounded;
+    
     [Header("Audio")] 
     public AudioClip jumpClip;
     public AudioClip doubleJumpClip;
@@ -69,6 +71,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Start()
     {
         animator.SetFloat("LocomotionBlend", 0.5f);
+        isGrounded = startGrounded;
     }
 
     public void StartPlayer()
