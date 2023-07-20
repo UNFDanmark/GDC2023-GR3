@@ -4795,6 +4795,7 @@ MonoBehaviour:
   waitTime: 3
   animator: {fileID: 1077447411}
   timer: {fileID: 1153513421}
+  winClip: {fileID: 8300000, guid: e2917b287d822594abde0562f988367a, type: 3}
   useWithLeaderboard: 1
 --- !u!65 &1077447413
 BoxCollider:

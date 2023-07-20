@@ -5096,6 +5096,7 @@ MonoBehaviour:
   waitTime: 3
   animator: {fileID: 1246069752}
   timer: {fileID: 1691528151}
+  winClip: {fileID: 8300000, guid: e2917b287d822594abde0562f988367a, type: 3}
   useWithLeaderboard: 1
 --- !u!135 &1246069755
 SphereCollider:
