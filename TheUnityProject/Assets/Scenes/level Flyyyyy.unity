@@ -8423,7 +8423,7 @@ MonoBehaviour:
   clip2: {fileID: 8300000, guid: 372c438acfd33664fb9f8b4e6a9f12fa, type: 3}
   audioSource: {fileID: 2022198150}
   xScale: 0.5
-  maxVolume: 0.5
+  maxVolume: 0.7
 --- !u!4 &2022198152
 Transform:
   m_ObjectHideFlags: 0

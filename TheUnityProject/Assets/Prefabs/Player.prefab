@@ -138,6 +138,7 @@ MonoBehaviour:
   forwardVel: 0
   verticalVel: 0
   isGrounded: 0
+  startGrounded: 1
   jumpClip: {fileID: 8300000, guid: 6bc8d224eec639f49bba01f4eb4b7b5c, type: 3}
   doubleJumpClip: {fileID: 8300000, guid: 3bdc3d9dad1cb4d45adfa7c1db61295c, type: 3}
   landClip: {fileID: 8300000, guid: 909690f7e5c0bee4995626abc3b4b49e, type: 3}
