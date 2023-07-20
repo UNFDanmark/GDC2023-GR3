@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class LeaderBoardUI : MonoBehaviour
 {
-    private const string PLAYERPREFS_LEVELNAME = "LevelName";
-    private const string PLAYERPREFS_LEVELPATH = "LevelPath";
-    
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Button backButton;
     [SerializeField] private Button nextButton;
@@ -49,7 +46,7 @@ public class LeaderBoardUI : MonoBehaviour
             
             HighscoreList highscoreList = JsonUtility.FromJson<HighscoreList>(text);
             entries = highscoreList.highscores;
-            sceneName = highscoreList.levelName;
+            sceneName = levelNames[pathIndex];
         }
         
         UpdateUI(entries, sceneName);

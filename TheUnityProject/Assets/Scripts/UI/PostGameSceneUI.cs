@@ -89,6 +89,7 @@ public class PostGameSceneUI : MonoBehaviour
         }
         
         float currentTime = PlayerPrefs.GetFloat(PLAYERPREFS_CURRENTSCORE);
+
         PlayerPrefs.DeleteKey(PLAYERPREFS_CURRENTSCORE);
         PlayerPrefs.Save();
 
