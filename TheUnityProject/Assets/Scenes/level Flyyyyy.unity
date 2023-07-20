@@ -5091,11 +5091,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecef253f5df48848a1b948539a84fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: PEAKS
+  levelName: POINTY PEAKS
+  levelPath: PEAKS
   waitTime: 3
   animator: {fileID: 1246069752}
   timer: {fileID: 1691528151}
-  useWithLeaderboard: 0
+  useWithLeaderboard: 1
 --- !u!135 &1246069755
 SphereCollider:
   m_ObjectHideFlags: 0

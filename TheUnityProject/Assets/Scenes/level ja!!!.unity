@@ -4666,7 +4666,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecef253f5df48848a1b948539a84fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: VALLEY
+  levelName: WIND VALLEY
+  levelPath: VALLEY
   waitTime: 3
   animator: {fileID: 1077447411}
   timer: {fileID: 1153513421}
