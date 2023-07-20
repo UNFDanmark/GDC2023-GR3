@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class WinArea : MonoBehaviour
 {
     private const string PLAYERPREFS_CURRENTSCORE = "CurrentScore";
-    private const string PLAYERPREFS_SCENENAME = "SceneName";
+    private const string PLAYERPREFS_LEVELNAME = "LevelName";
+    private const string PLAYERPREFS_LEVELPATH = "LevelPath";
 
     private int openHash = Animator.StringToHash("Open");
 
-    [SerializeField] private string sceneName;
+    [SerializeField] private string levelName;
+    [SerializeField] private string levelPath;
     [SerializeField] private float waitTime;
     [SerializeField] private Animator animator;
     [SerializeField] private Timer timer;
@@ -38,7 +40,8 @@ public class WinArea : MonoBehaviour
         if (hasWon && useWithLeaderboard)
         {
             PlayerPrefs.SetFloat(PLAYERPREFS_CURRENTSCORE, gameTime);
-            PlayerPrefs.SetString(PLAYERPREFS_SCENENAME, sceneName);
+            PlayerPrefs.SetString(PLAYERPREFS_LEVELNAME, levelName);
+            PlayerPrefs.SetString(PLAYERPREFS_LEVELPATH, levelPath);
         }
 
         StartCoroutine(LoadScene());

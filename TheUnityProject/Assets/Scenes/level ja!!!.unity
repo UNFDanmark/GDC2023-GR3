@@ -4666,7 +4666,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecef253f5df48848a1b948539a84fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: VALLEY
+  levelName: WIND VALLEY
+  levelPath: VALLEY
   waitTime: 3
   animator: {fileID: 1077447411}
   timer: {fileID: 1153513421}
@@ -5431,7 +5432,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3209554841506446676, guid: 5f46e21a6f4678747803db8239c537c5, type: 3}
 --- !u!1 &1192915858

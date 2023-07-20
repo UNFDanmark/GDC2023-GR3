@@ -14,6 +14,7 @@ public class LeaderBoardUI : MonoBehaviour
     [SerializeField] private Button nextButton;
 
     [SerializeField] private string[] paths;
+    [SerializeField] private string[] levelNames;
     [SerializeField] private LeaderboardLineUI[] lines;
 
     private int pathIndex;
@@ -27,13 +28,15 @@ public class LeaderBoardUI : MonoBehaviour
 
     private void LoadLeaderboard()
     {
+        string sceneName;
         HighscoreEntry[] entries;
         
         if (!File.Exists(Application.persistentDataPath + "/" + paths[pathIndex] + ".txt"))
         {
             //If no file - create file with empty entries and new player entry
             
-            entries = HandleMissingFile(paths[pathIndex]);
+            entries = HandleMissingFile(levelNames[pathIndex]);
+            sceneName = levelNames[pathIndex];
         }
         else
         {
@@ -45,9 +48,10 @@ public class LeaderBoardUI : MonoBehaviour
             
             HighscoreList highscoreList = JsonUtility.FromJson<HighscoreList>(text);
             entries = highscoreList.highscores;
+            sceneName = highscoreList.levelName;
         }
         
-        UpdateUI(entries);
+        UpdateUI(entries, sceneName);
     }
     
     private void SetUpButtons()
@@ -97,8 +101,10 @@ public class LeaderBoardUI : MonoBehaviour
         return highscoreList.highscores;
     }
     
-    private void UpdateUI(HighscoreEntry[] entries)
+    private void UpdateUI(HighscoreEntry[] entries, string sceneName)
     {
+        titleText.text = sceneName;
+        
         for (int i = 0; i < lines.Length; i++)
         {
             HighscoreEntry entry = entries[i];
