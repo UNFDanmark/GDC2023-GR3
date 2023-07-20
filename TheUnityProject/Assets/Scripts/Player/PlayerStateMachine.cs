@@ -34,6 +34,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Audio")] 
     public AudioClip jumpClip;
     public AudioClip doubleJumpClip;
+    public AudioClip landClip;
     
     public enum DeaccelerationMethod
     {
@@ -102,6 +103,7 @@ public class PlayerStateMachine : MonoBehaviour
             if (groundsTouched == 0)
             {
                 animator.SetTrigger(landHash);
+                AudioSource.PlayClipAtPoint(landClip, Camera.main.transform.position, 0.4f);
             }
             
             groundsTouched++;
