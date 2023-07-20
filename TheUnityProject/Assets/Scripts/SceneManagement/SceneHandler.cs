@@ -16,6 +16,7 @@ public class SceneHandler : MonoBehaviour
     public int postGameScene;
     public int tutorialSceneIndex;
     public int leaderboardSceneIndex;
+    public int creditsSceneIndex;
         
     [Header("Fading")]
     [SerializeField] private float fadeOutTime = 1f; /*Amount of seconds it takes to fade to black.*/
@@ -26,11 +27,6 @@ public class SceneHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] private CanvasGroup canvasGroup;
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip fadeOutClip;
-    [SerializeField] private AudioClip fadeInClip;
-    
     public SceneLoadType SceneLoadType;
     private Coroutine currentActiveFade;
     private bool isLoading;
@@ -76,10 +72,6 @@ public class SceneHandler : MonoBehaviour
 
         yield return new WaitForSeconds(startFadeWaitTime);
 
-        /*
-        audioSource.clip = fadeOutClip;
-        audioSource.Play();
-        */
         yield return FadeOut(fadeOutTime, shouldChangeMusic);
 
         yield return SceneManager.LoadSceneAsync(index);
@@ -90,11 +82,6 @@ public class SceneHandler : MonoBehaviour
         {
             MusicPlayer.Instance.SetClip(clip);
         }
-        
-        /*
-        audioSource.clip = fadeInClip;
-        audioSource.Play();
-        */
         
         FadeIn(fadeInTime, shouldChangeMusic);
         

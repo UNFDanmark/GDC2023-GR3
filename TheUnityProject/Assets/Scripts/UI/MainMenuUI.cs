@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button tutorialButton;
     [SerializeField] private Button leaderboardButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button creditsButton;
 
     void Start()
     {
@@ -37,6 +38,11 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.AddListener(() =>
         {
             Application.Quit();
+        });
+        
+        quitButton.onClick.AddListener(() =>
+        {
+            SceneHandler.Instance.LoadScene(SceneHandler.Instance.creditsSceneIndex, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
         });
     }
 }
