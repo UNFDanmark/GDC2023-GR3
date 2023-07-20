@@ -2331,7 +2331,7 @@ MonoBehaviour:
   tutorialButton: {fileID: 1903713361}
   leaderboardButton: {fileID: 1887498442}
   quitButton: {fileID: 2090353835}
-  creditsButton: {fileID: 0}
+  creditsButton: {fileID: 958376636}
 --- !u!1 &2090353833
 GameObject:
   m_ObjectHideFlags: 0
