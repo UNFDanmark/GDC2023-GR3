@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class LeaderBoardUI : MonoBehaviour
 {
-    private const string PLAYERPREFS_SCENENAME = "SceneName";
+    private const string PLAYERPREFS_LEVELNAME = "LevelName";
+    private const string PLAYERPREFS_LEVELPATH = "LevelPath";
     
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Button backButton;
@@ -35,7 +36,7 @@ public class LeaderBoardUI : MonoBehaviour
         {
             //If no file - create file with empty entries and new player entry
             
-            entries = HandleMissingFile(levelNames[pathIndex]);
+            entries = HandleMissingFile(paths[pathIndex]);
             sceneName = levelNames[pathIndex];
         }
         else

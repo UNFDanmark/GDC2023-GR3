@@ -40,7 +40,7 @@ public class MainMenuUI : MonoBehaviour
             Application.Quit();
         });
         
-        quitButton.onClick.AddListener(() =>
+        creditsButton.onClick.AddListener(() =>
         {
             SceneHandler.Instance.LoadScene(SceneHandler.Instance.creditsSceneIndex, MusicPlayer.Instance.menuMusic, SceneLoadType.Load);
         });

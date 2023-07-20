@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 public class PostGameSceneUI : MonoBehaviour
 {
     private const string PLAYERPREFS_CURRENTSCORE = "CurrentScore";
-    private const string PLAYERPREFS_SCENENAME = "SceneName";
+    private const string PLAYERPREFS_LEVELNAME = "LevelName";
+    private const string PLAYERPREFS_LEVELPATH = "LevelPath";
 
     [SerializeField] private bool testMode;
     [SerializeField] private LeaderboardLineUI[] lines;
@@ -19,9 +20,10 @@ public class PostGameSceneUI : MonoBehaviour
     {
         HighscoreList highscoreList;
 
-        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
-
-        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
+        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_LEVELNAME);
+        string scenePath = PlayerPrefs.GetString(PLAYERPREFS_LEVELPATH);
+        
+        string path = Application.persistentDataPath + "/" + scenePath + ".txt";
         
         if (!File.Exists(path))
         {
@@ -52,15 +54,16 @@ public class PostGameSceneUI : MonoBehaviour
 
     private HighscoreList HandleMissingFile()
     {
-        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
+        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_LEVELNAME);
+        string scenePath = PlayerPrefs.GetString(PLAYERPREFS_LEVELPATH);
         
-        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
+        string path = Application.persistentDataPath + "/" + scenePath + ".txt";
         
         StreamWriter sw = new StreamWriter(path);
 
         HighscoreList highscoreList = new HighscoreList();
 
-        highscoreList.levelName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
+        highscoreList.levelName = PlayerPrefs.GetString(PLAYERPREFS_LEVELNAME);
         
         PlayerPrefs.Save();
 
@@ -79,7 +82,7 @@ public class PostGameSceneUI : MonoBehaviour
 
     private void HandlePlayerWon(HighscoreList highscoreList)
     {
-        if (!PlayerPrefs.HasKey(PLAYERPREFS_CURRENTSCORE) || !PlayerPrefs.HasKey(PLAYERPREFS_SCENENAME))
+        if (!PlayerPrefs.HasKey(PLAYERPREFS_CURRENTSCORE) || !PlayerPrefs.HasKey(PLAYERPREFS_LEVELNAME) || !PlayerPrefs.HasKey(PLAYERPREFS_LEVELPATH))
         {
             Debug.LogError("No player time found!");
             return;
@@ -156,9 +159,10 @@ public class PostGameSceneUI : MonoBehaviour
         
         entries[playerIndexInLeaderboard] = new HighscoreEntry(_name, _time);
             
-        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_SCENENAME);
+        string sceneName = PlayerPrefs.GetString(PLAYERPREFS_LEVELNAME);
+        string scenePath = PlayerPrefs.GetString(PLAYERPREFS_LEVELPATH);
         
-        string path = Application.persistentDataPath + "/" + sceneName + ".txt";
+        string path = Application.persistentDataPath + "/" + scenePath + ".txt";
         
         StreamWriter sw = new StreamWriter(path);
 
