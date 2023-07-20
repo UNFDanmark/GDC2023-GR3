@@ -16,8 +16,6 @@ public class TutorialWinArea : MonoBehaviour
     {
         if (other.CompareTag(PLAYER_TAG))
         {
-            SceneHandler.Instance.LoadScene(SceneHandler.Instance.mainMenuSceneIndex, MusicPlayer.Instance.gameMusic, SceneLoadType.Load);
-            
             if (animator != null)
             {
                 animator.SetTrigger(openHash);
